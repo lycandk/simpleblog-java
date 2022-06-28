@@ -1,11 +1,10 @@
 package cn.lycan.simpleblogjava.controller;
 
+import cn.lycan.simpleblogjava.entity.UserEntity;
 import cn.lycan.simpleblogjava.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -26,5 +25,16 @@ public class UserController {
         return userService.getById(id);
     }
     
+    /**
+     * 测试实体校验
+     * 测试未通过，校验未生效
+     *
+     * @param user
+     * @return
+     */
+    @PostMapping("/save")
+    public Object save(@RequestBody @Valid UserEntity user) {
+        return user;
+    }
     
 }

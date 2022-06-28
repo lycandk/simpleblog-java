@@ -4,6 +4,10 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -12,10 +16,15 @@ import java.time.LocalDateTime;
  * <p>
  *
  * </p>
+ * 表单数据提交的时候，前端的校验我们可以使用一些类似于jQuery Validate等js插件实现，
+ * 而后端我们可以使用Hibernate validatior来做校验。
+ * 我们使用springboot框架作为基础，那么就已经自动集成了Hibernate validatior。
  *
  * @author yuwen
  * @since 2022-06-28
  */
+@Data
+@ToString
 @TableName("m_user")
 public class UserEntity implements Serializable {
     
@@ -24,12 +33,14 @@ public class UserEntity implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
     
+    @NotBlank(message = "昵称不能为空")
     @TableField("username")
     private String username;
     
     @TableField("avatar")
     private String avatar;
-    
+    @NotBlank(message = "邮箱不能为空")
+    @Email(message = "邮箱格式不正确")
     @TableField("email")
     private String email;
     
