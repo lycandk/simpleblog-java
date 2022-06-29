@@ -67,7 +67,7 @@ public class ShiroConfig {
     public DefaultWebSecurityManager securityManager(AccountRealm accountRealm,
                                                      SessionManager sessionManager,
                                                      RedisCacheManager redisCacheManager) {
-        DefaultWebSecurityManager defaultWebSecurityManager = new DefaultWebSecurityManager();
+        DefaultWebSecurityManager defaultWebSecurityManager = new DefaultWebSecurityManager(accountRealm);
         defaultWebSecurityManager.setSessionManager(sessionManager);
         defaultWebSecurityManager.setCacheManager(redisCacheManager);
         /*
